@@ -1,0 +1,115 @@
+---
+title: "acspums"
+author: "William Sexton"
+date: "7/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Predicting departure time using arrival time
+
+```{r}
+library(tidyr)
+acspp = read.csv("psam_p16.csv")  # read csv file
+summary(acspp)
+
+library(ggplot2)
+scatterplot <- ggplot(data = acspp, mapping = aes(x = JWAP, y = JWDP)) + geom_point()
+scatterplot
+
+
+regmodel = lm(JWDP ~ JWAP, data = acspp)
+summary(regmodel)
+plot(regmodel)
+
+```
+
+# Predicting hours worked using commute time
+
+```{r}
+library(tidyr)
+acspp = read.csv("psam_p16.csv")  # read csv file
+
+library(ggplot2)
+scatterplot <- ggplot(data = acspp, mapping = aes(x = JWMNP, y = WKHP)) + geom_point()
+scatterplot
+
+
+regmodel = lm(WKHP ~ JWMNP, data = acspp)
+summary(regmodel)
+plot(regmodel)
+
+```
+
+# Predicting income using hours worked
+
+```{r}
+library(tidyr)
+acspp = read.csv("psam_p16.csv")  # read csv file
+
+library(ggplot2)
+scatterplot <- ggplot(data = acspp, mapping = aes(x = WKHP, y = PINCP)) + geom_point()
+scatterplot + scale_y_log10()
+
+
+regmodel = lm(PINCP ~ WKHP, data = acspp)
+summary(regmodel)
+plot(regmodel)
+
+```
+
+# Predicting income using age
+
+```{r}
+library(tidyr)
+acspp = read.csv("psam_p16.csv")  # read csv file
+
+library(ggplot2)
+scatterplot <- ggplot(data = acspp, mapping = aes(x = AGEP, y = PINCP)) + geom_point()
+scatterplot
+
+
+regmodel = lm(PINCP ~ AGEP, data = acspp)
+summary(regmodel)
+plot(regmodel)
+
+```
+
+# Predicting age using year married
+
+```{r}
+library(tidyr)
+acspp = read.csv("psam_p16.csv")  # read csv file
+
+library(ggplot2)
+scatterplot <- ggplot(data = acspp, mapping = aes(x = MARHYP, y = AGEP)) + geom_point()
+scatterplot
+
+
+regmodel = lm(AGEP ~ MARHYP, data = acspp)
+summary(regmodel)
+plot(regmodel)
+
+```
+
+# Predicting age using education level
+
+```{r}
+library(tidyr)
+acspp = read.csv("psam_p16.csv")  # read csv file
+
+library(ggplot2)
+scatterplot <- ggplot(data = acspp, mapping = aes(x = SCHL, y = AGEP)) + geom_point()
+scatterplot
+
+
+regmodel = lm(AGEP ~ SCHL, data = acspp)
+summary(regmodel)
+plot(regmodel)
+
+```
+
+
