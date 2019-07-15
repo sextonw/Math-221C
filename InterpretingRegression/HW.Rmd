@@ -1,0 +1,28 @@
+---
+title: "HeightWeight"
+author: "William Sexton"
+date: "7/14/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r}
+library(tidyr)
+hw = read.csv("HeightWeight.csv")  # read csv file
+summary(hw)
+
+library(ggplot2)
+scatterplot <- ggplot(data = hw, mapping = aes(x = HeightIn, y = WeightLb)) + geom_point()
+scatterplot
+
+
+regmodel = lm(WeightLb ~ HeightIn, data = hw)
+summary(regmodel)
+plot(regmodel)
+
+regmodel2 = lm(WeightLb ~ HeightFt, data = hw)
+summary(regmodel2)
+plot(regmodel2)
+```{r}
